@@ -1,0 +1,3 @@
+<items gfxroot="gfx/items/" version="1">
+	<active description="Get Heart" gfx="heartGenerator.png" maxcharges="8" name="heartGenerator" />
+</items>
