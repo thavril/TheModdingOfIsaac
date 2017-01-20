@@ -15,13 +15,18 @@ end
 
 function Afterbrasse:onUpdate(player)
   if player:HasCollectible(creep_tears_item) then
-    debug_text = "u has item"
+    --debug_text = tostring(player.FireDelay)
     
     shoot_dir = player:GetShootingJoystick()
     if (shoot_dir.X ~= 0 or shoot_dir.Y ~= 0) then
-      --ajouter spawn en fonction du tir rate
-      random_pos = Isaac.GetRandomPosition()
-      Isaac.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.PLAYER_CREEP_RED, 0, random_pos, Vector(0, 0), player)
+      if (player.FireDelay <= 0) then
+        fired_tears_nb = fired_tears_nb + 1
+        debug_text = tostring(fired_tears_nb)
+        if (fired_tears_nb % 5 == 0) then
+          random_pos = Isaac.GetRandomPosition()
+          Isaac.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.PLAYER_CREEP_RED, 0, random_pos, Vector(0, 0), player)
+        end
+      end
     end
   end
 end
