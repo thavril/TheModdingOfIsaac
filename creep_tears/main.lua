@@ -9,17 +9,22 @@ local creep_tears_item = Isaac.GetItemIdByName("Creep Tears");
 
 debug_text = "u has no item"
 
+fired_tears_nb = 0
+
 function Afterbrasse:onRender()
   Isaac.RenderText(debug_text, 100, 100, 255, 0, 0, 255)
 end
 
 function Afterbrasse:onUpdate(player)
   if player:HasCollectible(creep_tears_item) then
+    --Isaac.DebugString(tostring(player.FireDelay))
     --debug_text = tostring(player.FireDelay)
+    --debug_text = tostring(player.MaxFireDelay)
     
     shoot_dir = player:GetShootingJoystick()
     if (shoot_dir.X ~= 0 or shoot_dir.Y ~= 0) then
-      if (player.FireDelay <= 0) then
+      if (player.FireDelay == player.MaxFireDelay - 1) then
+        --Isaac.DebugString("JE SHOOT")
         fired_tears_nb = fired_tears_nb + 1
         debug_text = tostring(fired_tears_nb)
         if (fired_tears_nb % 5 == 0) then
